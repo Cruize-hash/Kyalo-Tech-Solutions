@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyalo Tech Solutions - Creating & Innovating</title>
+    
+    <!-- Favicon Logo -->
+    <link rel="icon" href="https://i.ibb.co/chPSZ3Vs/Whats-App-Image-2026-08-13-at-13-13-53.jpg" type="image/jpeg">
+    
+    <style>
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* LIGHT THEME VARIABLES (Default) */
+        :root {
+            --primary-red: #e61c24;       /* Hexagon Border Red */
+            --primary-dark: #b80d14;      /* Deep Red Hover */
+            --accent-purple: #6a1b9a;     /* KTS Purple Text */
+            --accent-hover: #4a148c;      /* Dark Purple */
+            --whatsapp-green: #25d366;    /* WhatsApp Green */
+            --whatsapp-dark: #1da851;     /* WhatsApp Dark Hover */
+            
+            --bg-light: #f8fafc;
+            --header-bg: rgba(255, 255, 255, 0.96);
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            --price-bg: #fff1f2;
+            --price-border: #fecdd3;
+            --watermark-overlay: rgba(248, 250, 252, 0.94);
+            --transition: all 0.3s ease;
+        }
+
+        /* DARK THEME OVERRIDES */
+        body.dark-theme {
+            --bg-light: #0f172a;
+            --header-bg: rgba(15, 23, 42, 0.95);
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --card-border: #334155;
+            --text-dark: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-purple: #c084fc;     /* Brighter Purple for Dark Backgrounds */
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            --price-bg: #311215;
+            --price-border: #881337;
+            --watermark-overlay: rgba(15, 23, 42, 0.94);
+        }
+
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Body with Logo Watermark Background Overlay */
+        body {
+            background-color: var(--bg-light);
+            background-image: 
+                linear-gradient(var(--watermark-overlay), var(--watermark-overlay)),
+                url('https://i.ibb.co/chPSZ3Vs/Whats-App-Image-2026-08-13-at-13-13-53.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center center;
+            background-size: 550px auto;
+            color: var(--text-dark);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Navigation */
+        header {
+            background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-bottom: 3px solid var(--primary-red);
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 2rem;
+        }
+
+        .logo-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-img {
+            height: 52px;
+            width: auto;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent-purple);
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text span {
+            color: var(--primary-red);
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        /* Navigation Links & Toggle Wrapper */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            padding: 0.3rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+            border-bottom: 2px solid var(--primary-red);
+        }
+
+        /* Embedded Theme Toggle Button */
+        .theme-toggle-btn {
+            background: transparent;
+            border: 2px solid var(--primary-red);
+            color: var(--text-dark);
+            padding: 0.4rem 0.85rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            line-height: 1;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--primary-red);
+            color: var(--white);
+        }
+
+        /* Hero Banner Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(30, 41, 59, 0.88) 100%),
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+            scroll-margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero-logo {
+            width: 140px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 2px solid var(--primary-red);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .hero-slogan {
+            color: #f1f5f9;
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 0.85rem 2.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px rgba(230, 28, 36, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            padding: 0.85rem 2.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Feature Highlights / About Us */
+        .features-section {
+            background-color: var(--card-bg);
+            padding: 3.5rem 2rem;
+            border-bottom: 1px solid var(--card-border);
+            scroll-margin-top: 80px;
+            transition: background-color 0.3s ease;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature-box {
+            padding: 1.25rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.03);
+            transition: var(--transition);
+        }
+
+        .feature-box:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        .feature-box h4 {
+            font-size: 1.2rem;
+            color: var(--accent-purple);
+            margin: 0.8rem 0 0.4rem 0;
+            font-weight: 700;
+        }
+
+        .feature-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Services Grid Section */
+        #services {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(4px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary-red);
+        }
+
+        .service-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .service-info h3 {
+            font-size: 1.15rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .service-info p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-action-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .service-price {
+            font-weight: 700;
+            color: var(--primary-red);
+            font-size: 0.9rem;
+            background-color: var(--price-bg);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid var(--price-border);
+        }
+
+        .btn-add-cart {
+            background-color: var(--whatsapp-green);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--whatsapp-dark);
+            transform: scale(1.03);
+        }
+
+        /* Payment Options & Policy Section */
+        #payment-options {
+            max-width: 900px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+            scroll-margin-top: 100px;
+        }
+
+        .payment-banner {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-red);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+
+        .payment-header h3 {
+            font-size: 1.8rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-badge {
+            display: inline-block;
+            background: var(--price-bg);
+            color: var(--primary-red);
+            border: 1px solid var(--price-border);
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mpesa-card {
+            background: rgba(37, 211, 102, 0.05);
+            border: 2px dashed var(--whatsapp-green);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .mpesa-card h4 {
+            font-size: 1.4rem;
+            color: var(--whatsapp-dark);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        body.dark-theme .mpesa-card h4 {
+            color: var(--whatsapp-green);
+        }
+
+        .till-box {
+            background: var(--white);
+            color: var(--text-dark);
+            border: 2px solid var(--whatsapp-green);
+            padding: 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-theme .till-box {
+            background: #1e293b;
+            color: #ffffff;
+        }
+
+        .till-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-red);
+            letter-spacing: 2px;
+        }
+
+        .payment-note {
+            margin-top: 2rem;
+            padding: 1rem 1.5rem;
+            background-color: rgba(230, 28, 36, 0.08);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            text-align: left;
+        }
+
+        .payment-cta-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            background-color: var(--whatsapp-green);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .payment-cta-btn:hover {
+            background-color: var(--whatsapp-dark);
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #12031a;
+            color: var(--white);
+            padding: 4rem 2rem 1.5rem 2rem;
+            margin-top: 5rem;
+            border-top: 4px solid var(--primary-red);
+            scroll-margin-top: 80px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.2rem;
+            color: var(--primary-red);
+            font-size: 1.1rem;
+        }
+
+        .footer-col p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-red);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .payment-banner {
+                padding: 1.5rem;
+            }
+            .till-number {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#home" class="logo-brand">
+                <img src="https://i.ibb.co/chPSZ3Vs/Whats-App-Image-2026-08-13-at-13-13-53.jpg" alt="Kyalo Tech Solutions Logo" class="logo-img">
+                <div class="logo-text">
+                    KYALO TECH SOLUTIONS
+                    <span>CREATING & INNOVATING</span>
+                </div>
+            </a>
+            
+            <div class="nav-right">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#payment-options">Payment Info</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Embedded Theme Toggle Button -->
+                <button class="theme-toggle-btn" id="themeToggleBtn">
+                    <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img src="https://i.ibb.co/chPSZ3Vs/Whats-App-Image-2026-08-13-at-13-13-53.jpg" alt="KTS Logo" class="hero-logo">
+            <h1>Kyalo Tech Solutions</h1>
+            <div class="hero-slogan">Creating & Innovating</div>
+            <p>Your premier hub for KRA tax filings, eCitizen applications, NTSA TIMS processing, dynamic quotations, and document formatting in Kenya & Diaspora clients worldwide.</p>
+            <div class="hero-cta-group">
+                <a href="#services" class="btn-primary">Explore Our Services</a>
+                <a href="#payment-options" class="btn-secondary">Pre-Payment Options</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Highlights / About Us (6 Boxes featuring Diaspora & WhatsApp/Email Support) -->
+    <section class="features-section" id="about">
+        <div class="features-container">
+            <div class="feature-box">
+                <h4>Swift Processing</h4>
+                <p>Fast turnaround time on government applications, DLs, and eCitizen requests.</p>
+            </div>
+            <div class="feature-box">
+                <h4>100% Secure & Confidential</h4>
+                <p>Your personal data and tax documents are processed with maximum privacy.</p>
+            </div>
+            <div class="feature-box">
+                <h4>Dynamic Quotes</h4>
+                <p>Tailored pricing for complex documents, corporate invoicing, and research reports.</p>
+            </div>
+            <div class="feature-box">
+                <h4>Direct M-Pesa Integration</h4>
+                <p>Quick and seamless upfront payments via Buy Goods Till Number.</p>
+            </div>
+            <div class="feature-box">
+                <h4>24/7 WhatsApp & Email Support</h4>
+                <p>Instant messaging on +254 713 285 960 and dedicated email assistance at kyalotechsolutions@gmail.com.</p>
+            </div>
+            <div class="feature-box">
+                <h4>Diaspora Friendly Services</h4>
+                <p>Seamless service delivery, tax compliance, and portal support for Kenyans living abroad.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid Section -->
+    <section id="services">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Click "Add to Cart / Order" to request any service directly on WhatsApp!</p>
+
+        <div class="services-grid">
+            
+            <!-- 1. NTSA TIMS Services -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80" alt="Driving and Automotive Services" class="service-img">
+                <div class="service-info">
+                    <h3>NTSA TIMS SERVICES</h3>
+                    <p>Driving license renewals, smart DL applications, vehicle transfers, and logbook updates.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">KES 400</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20would%20like%20to%20order%20NTSA%20TIMS%20Services." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Microsoft Word & Excel -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" alt="Microsoft Office & Computer Processing" class="service-img">
+                <div class="service-info">
+                    <h3>MICROSOFT OFFICE - WORD & EXCEL</h3>
+                    <p>Professional document typing, formatting, spreadsheet processing, and complex data layouts.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">KES 200</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20need%20assistance%20with%20Microsoft%20Word%20%26%20Excel%20Formatting." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Quotations -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80" alt="Business Quotation Documents" class="service-img">
+                <div class="service-info">
+                    <h3>QUOTATIONS</h3>
+                    <p>Accurate business and procurement quotation drafting tailored to client requirements.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">KES 200</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20would%20like%20to%20request%20a%20Quotation%20drafting%20service." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Invoice Processing -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Financial Invoice Calculations" class="service-img">
+                <div class="service-info">
+                    <h3>INVOICE PROCESSING</h3>
+                    <p>Professional itemized billing creation for corporate clients and local small businesses.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">KES 200</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20need%20help%20with%20Invoice%20Processing." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. eCitizen Services -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=600&q=80" alt="Government eCitizen Services" class="service-img">
+                <div class="service-info">
+                    <h3>eCITIZEN SERVICES</h3>
+                    <p>Business registration, marriage certificates, good conduct applications, and passport tracking.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">Varies</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20am%20inquiring%20about%20eCitizen%20Services." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Writing & Research -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80" alt="Writing & Academic Research" class="service-img">
+                <div class="service-info">
+                    <h3>WRITING & RESEARCH</h3>
+                    <p>High-quality professional articles, academic support, and comprehensive report preparation.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">From KES 3,000</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20need%20Writing%20%26%20Research%20services." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Professional Resume Writing -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80" alt="Professional Resume CV Writing" class="service-img">
+                <div class="service-info">
+                    <h3>PROFESSIONAL RESUME WRITING</h3>
+                    <p>Tailored ATS-compliant resumes and cover letters designed to secure executive positions.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">Varies</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20want%20to%20order%20a%20Professional%20Resume%20Writing%20service." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Online Job Application -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Online Application on Laptop" class="service-img">
+                <div class="service-info">
+                    <h3>ONLINE JOB APPLICATION</h3>
+                    <p>Submission assistance across corporate portals, NGO application systems, and recruitment boards.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">From KES 200</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20need%20help%20submitting%20an%20Online%20Job%20Application." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. KRA iTax Services -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=600&q=80" alt="KRA iTax Returns Filing" class="service-img">
+                <div class="service-info">
+                    <h3>KRA ITAX SERVICES</h3>
+                    <p>Filing of annual income tax returns (Nil or employment returns), PIN registration, and compliance certificates.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">From KES 200</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20need%20assistance%20with%20KRA%20iTax%20Services." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. PDF Editing & Conversion -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80" alt="Digital PDF Editing and Document Conversion" class="service-img">
+                <div class="service-info">
+                    <h3>PDF EDITING & CONVERSION</h3>
+                    <p>Document formatting adjustment, extraction, merging, password locking, and format conversion.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">From KES 300</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20would%20like%20to%20order%20PDF%20Editing%20%26%20Conversion." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. Nairobi City County Permits -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&q=80" alt="Nairobi Business Permits" class="service-img">
+                <div class="service-info">
+                    <h3>NAIROBI CITY COUNTY PERMITS</h3>
+                    <p>Unified Single Business Permits (SBP) renewals, parking clearances, and county compliance tracking.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">From KES 350</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20am%20inquiring%20about%20Nairobi%20City%20County%20Permits." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. Neema Services -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80" alt="Neema Institutional Portal Verification" class="service-img">
+                <div class="service-info">
+                    <h3>NEEMA SERVICES</h3>
+                    <p>Specialized institutional system processing, verification services, and application updates.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">From KES 500</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20need%20NEEMA%20Services%20assistance." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. Receipts Processing -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=600&q=80" alt="Payment Receipts and Sales Slips" class="service-img">
+                <div class="service-info">
+                    <h3>RECEIPTS PROCESSING</h3>
+                    <p>E-receipt generation, custom sales slips, and payment logs configuration for transactions.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">From KES 200</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20need%20Receipts%20Processing%20support." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14. Visa & Passport Applications -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="Visa and Passport Applications" class="service-img">
+                <div class="service-info">
+                    <h3>VISA & PASSPORT APPLICATIONS</h3>
+                    <p>e-Visa processing, passport application updates, document scanning, and official portal support.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">From KES 500</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20am%20inquiring%20about%20Visa%20%26%20Passport%20Application%20services." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15. Web & Logo Design -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Web Development and Logo Design" class="service-img">
+                <div class="service-info">
+                    <h3>WEB & LOGO DESIGN</h3>
+                    <p>Modern business web development, custom logo creation, corporate branding, and graphic design.</p>
+                    <div class="card-action-row">
+                        <span class="service-price">From KES 2,500</span>
+                        <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20need%20assistance%20with%20Web%20%26%20Logo%20Design." class="btn-add-cart" target="_blank">🛒 Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pre-Payment Methods & Policy Section -->
+    <section id="payment-options">
+        <div class="payment-banner">
+            <div class="payment-header">
+                <h3>Payment Details & Upfront Policy</h3>
+                <span class="payment-badge">🔒 Pay Before Service / Deposit Required</span>
+                <p style="color: var(--text-muted); margin-top: 0.8rem;">
+                    To ensure immediate resource allocation and fast processing, all services require full upfront payment or an agreed deposit via M-Pesa before work commences.
+                </p>
+            </div>
+
+            <div class="mpesa-card">
+                <h4>📲 LIPA NA M-PESA</h4>
+                <p style="color: var(--text-muted); font-weight: 600;">Buy Goods & Services</p>
+                <div class="till-box">
+                    <div style="font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; color: var(--text-muted);">TILL NUMBER</div>
+                    <div class="till-number">5548983</div>
+                </div>
+                <p style="font-size: 0.95rem; color: var(--text-dark);"><strong>Account Name:</strong> KELVIN KYALO MUTHAMA</p>
+                <a href="https://wa.me/254713285960?text=Hello%20Kyalo%20Tech%20Solutions,%20I%20have%20made%20a%20payment%20via%20Till%20Number%205548983.%20Here%20is%20my%20M-Pesa%20confirmation." class="payment-cta-btn" target="_blank">Send M-Pesa Receipt on WhatsApp</a>
+            </div>
+
+            <div class="payment-note">
+                📌 <strong>Payment Instructions:</strong>
+                <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>Go to M-Pesa on your phone and select <strong>Lipa na M-Pesa</strong>.</li>
+                    <li>Select <strong>Buy Goods and Services</strong>.</li>
+                    <li>Enter Till Number: <strong>5548983</strong>.</li>
+                    <li>Enter the agreed amount and your M-Pesa PIN to confirm.</li>
+                    <li>Share the M-Pesa transaction SMS via WhatsApp to start processing!</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Kyalo Tech Solutions</h4>
+                <p><em>Creating & Innovating</em></p>
+                <p>Your reliable partner for business IT support, government portal applications, and office documentation.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#payment-options">Pre-Payment Info</a></li>
+                    <li><a href="#contact">Contact Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <p>Email: kyallohkev@gmail.com.com</p>
+                <p>Phone / WhatsApp: +254 713 285 960</p>
+                <p>Location: Nairobi, Kenya</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kyalo Tech Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle JavaScript -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        // Check stored theme in localStorage
+        const savedTheme = localStorage.getItem('kts-theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            const isDarkMode = document.body.classList.contains('dark-theme');
+            if (isDarkMode) {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+                localStorage.setItem('kts-theme', 'dark');
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('kts-theme', 'light');
+            }
+        });
+    </script>
+</body>
+</html>
